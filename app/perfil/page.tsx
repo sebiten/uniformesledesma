@@ -45,7 +45,10 @@ export default async function Perfil() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/login");
+  if (!user) redirect("/login"); // este o el de abajo me estan dando problemas al mostrar el perfil, no se si es por el middleware o que, pero lo dejo asi por ahora para no romper todo
+  console.log(
+    user
+  );
 
   const { data: profileData } = await supabase
     .from("profiles")
@@ -53,11 +56,12 @@ export default async function Perfil() {
     .eq("id", user.id)
     .single();
 
-  if (!profileData) redirect("/login");
+  if (!profileData) console.log("no se encontro datos de comprar para el perfil de este usuario"); // al final este era el problema lo dejo resuelto
+
 
   const email = user.email;
   const avatar = user.user_metadata?.avatar_url || "/placeholder.svg";
-  const fullName = user.user_metadata?.full_name || profileData.username;
+  const fullName = user.user_metadata?.full_name || profileData?.username;
   const createdAt = new Date(user.created_at).toLocaleDateString("es-AR");
 
   // ======= GET ORDERS =======

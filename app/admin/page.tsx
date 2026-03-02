@@ -20,7 +20,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { DeleteOrderButton } from "./deleteOrderButton";
 import { updateOrderStatusAction } from "@/app/actions";
 
 // SERVER ACTION: ELIMINAR PEDIDO
@@ -372,12 +371,12 @@ export default async function PedidosPage({
                           </Link>
                         </Button>
 
-                        <div className="flex-1 sm:flex-initial">
+                        {/* <div className="flex-1 sm:flex-initial">
                           <DeleteOrderButton
                             orderId={order.id}
                             deleteAction={deleteOrderAction}
                           />
-                        </div>
+                        </div> */}
                         <form
                           action={async (formData) => {
                             "use server";
