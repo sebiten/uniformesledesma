@@ -9,14 +9,14 @@ export default async function Home() {
         <Hero />
         {/* Grid de productos */}
 
-        <BlackFridayBanner
+        {/* <BlackFridayBanner
           title="Se viene el Verano!"
           subtitle="Descubrí nuestra colección de ropa ligera y fresca para disfrutar al máximo la temporada. 😎"
           ctaLabel="Ver Productos"
           ctaLink="/tienda"
           backgroundImage="/fondo.webp" // Opcional, podés poner una imagen con nieve, ropa de abrigo, etc.
         />
-        <InstagramSection />
+        <InstagramSection /> */}
       </main>
     </>
   );

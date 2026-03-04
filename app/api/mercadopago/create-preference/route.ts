@@ -175,8 +175,8 @@ export async function POST(req: Request) {
                     failure: `${siteURL}/carrito`,
                     pending: `${siteURL}/carrito`,
                 },
-                notification_url: `${siteURL}/api/mercadopago/webhook`,
-                auto_return: "approved",
+                notification_url: `${siteURL}/api/mercadopago/webhook`
+                
             },
         });
 
