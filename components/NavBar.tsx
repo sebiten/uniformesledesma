@@ -73,10 +73,10 @@ export default function Navbar({ user, isAdmin }: NavbarProps) {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 md:w-14 md:h-14 relative rounded-xl overflow-hidden border border-[#0B1220]/10 bg-[#F3F6FA]">
+          <Link href="/" className="flex items-center gap-1">
+            <div className="w-24 h-24 relative mt-3 ">
               <Image
-                src="/mariellogo.png"
+                src="/logomariel.png"
                 alt="marieluniformes"
                 fill
                 className="object-cover"

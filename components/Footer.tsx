@@ -13,9 +13,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 relative rounded-xl overflow-hidden border border-[#0B1220]/10 bg-[#F3F6FA]">
+              <div className="w-20 h-20 mt-3 relative ">
                 <Image
-                  src="/marieluniformes.webp"
+                  src="/logomariel.png"
                   alt="marieluniformes"
                   fill
                   className="object-cover"
@@ -71,7 +71,7 @@ export default function Footer() {
               <div className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 text-[#0B2A5B] mt-0.5" />
                 <span className="text-[#0B1220]/65 text-sm">
-                  Salta, Salta — Argentina
+                  Ledesma - Jujuy, Argentina
                 </span>
               </div>
 
@@ -81,14 +81,14 @@ export default function Footer() {
                   href="tel:+543872226885"
                   className="text-[#0B1220]/65 text-sm hover:text-[#0B1220] transition"
                 >
-                  +54 387 222-6885
+                  +54 3886 575936
                 </a>
               </div>
 
-              <div className="flex items-start gap-2">
+              {/* <div className="flex items-start gap-2">
                 <InstagramIcon className="w-5 h-5 text-[#0B2A5B] mt-0.5" />
                 <span className="text-[#0B1220]/65 text-sm">@marieluniformes</span>
-              </div>
+              </div> */}
             </div>
           </div>
 

@@ -4,42 +4,52 @@ import "./globals.css";
 import { Playfair_Display } from "next/font/google";
 
 import Footer from "@/components/Footer";
-import { createClient } from "@/utils/supabase/server";
 import Navbar from "@/components/NavBar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { createClient } from "@/utils/supabase/server";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
 });
 
-// ---------- CONFIGURACIÓN SEO GLOBAL ----------
+// ---------- CONFIGURACIÓN SEO GLOBAL (MARIEL UNIFORMES) ----------
 
-const SITE_NAME = "Alma Lucía";
+const SITE_NAME = "Mariel Uniformes";
 const SITE_DESCRIPTION =
-  "Alma Lucía es una tienda de ropa femenina y masculina en Salta-Argentina. Moda actual, talles reales y toda la moda.";
-const SITE_URL = "https://almalucia.shop";
-const OG_IMAGE = `${SITE_URL}/almalucia.webp`; // Imagen principal
-const LOGO_IMAGE = `${SITE_URL}/almalucia.webp`; // También como logo para schema
+  "Mariel Uniformes: uniformes escolares en Ledesma, Jujuy. Camisas, chombas, pantalones y accesorios. Talles reales y atención personalizada.";
+const SITE_URL = "https://marieluniformes.com"; // ✅ cambiá por tu dominio real
+const OG_IMAGE = `logomariel.png`; // ✅ ideal 1200x630
+const LOGO_IMAGE = `logomariel.png`; // ✅ ideal cuadrado, transparente si podés
 
 export const metadata: Metadata = {
+
+  manifest: "/manifest.webmanifest",
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | Moda femenina y masculina`,
+    default: `${SITE_NAME} | Uniformes escolares en Ledesma`,
     template: `%s | ${SITE_NAME}`,
+  },
+  applicationName: "Mariel Uniformes",
+  appleWebApp: {
+    capable: true,
+    title: "Mariel Uniformes",
+    statusBarStyle: "default",
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "alma lucía",
-    "almalucia",
-    "ropa femenina",
-    "tienda online de ropa",
-    "moda mujer argentina",
-    "ropa argentina",
-    "envíos a todo el país",
+    "mariel uniformes",
+    "uniformes escolares",
+    "uniformes ledesma",
+    "uniformes jujuy",
+    "guardapolvos",
+    "camisas escolares",
+    "chombas escolares",
+    "uniformes colegio",
     "talles reales",
-    "tienda de ropa en Salta",
-    "shop online argentina",
+    "envíos",
+    "ledasma jujuy", // (si querés corregirlo a "ledesma", mejor)
+    "ledesma jujuy",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -48,7 +58,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: `${SITE_NAME} | Moda femenina y masculina online en Argentina`,
+    title: `${SITE_NAME} | Uniformes escolares en Ledesma, Jujuy`,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -56,16 +66,16 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: OG_IMAGE,
+        url: "/logomariel.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} - tienda de ropa femenina y masculina online`,
+        alt: `${SITE_NAME} - Uniformes escolares`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Moda femenina y masculina online en Argentina`,
+    title: `${SITE_NAME} | Uniformes escolares en Ledesma, Jujuy`,
     description: SITE_DESCRIPTION,
     images: [OG_IMAGE],
   },
@@ -84,11 +94,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/almalucia.webp", type: "image/webp" },
+      { url: "/big2.png", type: "image/png", sizes: "192x192" },
+      { url: "/big3.png", type: "image/png", sizes: "512x512" },
+
     ],
-    apple: [{ url: "/almalucia.webp", sizes: "180x180" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+
   },
-  category: "fashion",
+  category: "shopping",
 };
 
 // Mejor UX/SEO mobile
@@ -99,28 +112,29 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-// Schema.org — Organization + ClothingStore
+// Schema.org — Organization + Store (enfocado a uniformes)
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "ClothingStore"],
+  "@type": ["Organization", "Store"],
   name: SITE_NAME,
   url: SITE_URL,
   logo: LOGO_IMAGE,
   image: OG_IMAGE,
   sameAs: [
-    // poner tus redes reales si las tenés
-    "https://www.instagram.com/almalucia08",
+    // ✅ poné tus redes reales si las tenés
+    // "https://www.instagram.com/marieluniformes",
   ],
   address: {
     "@type": "PostalAddress",
     addressCountry: "AR",
-    addressRegion: "Salta",
-    addressLocality: "Salta",
+    addressRegion: "Jujuy",
+    addressLocality: "Libertador General San Martín", // Ledesma (ciudad)
   },
   contactPoint: [
     {
       "@type": "ContactPoint",
-      telephone: "+54-XXX-XXXXXXX", // si no querés poner teléfono, lo elimino
+      // ✅ si no querés poner teléfono, borrá telephone
+      telephone: "+54-XXX-XXXXXXX",
       contactType: "customer service",
       availableLanguage: ["es"],
       areaServed: "AR",
@@ -158,16 +172,16 @@ export default async function RootLayout({
         {/* JSON-LD para SEO */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar user={user} isAdmin={isAdmin} />
-          <main
-            className="flex-1 flex flex-col w-full min-h-screen bg-beige-50"
-          >{children}</main>
+
+          <main className="flex-1 flex flex-col w-full min-h-screen bg-neutral-50">
+            {children}
+          </main>
+
           <Footer />
         </ThemeProvider>
       </body>
